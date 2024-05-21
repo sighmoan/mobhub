@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.io.InputStream;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -28,7 +30,14 @@ class MobhubV1ApplicationTests {
 
 	@Test
 	void controllerResponds() throws Exception {
-		this.mockmvc.perform(post("/push"));
+		InputStream sampleGhResponse = MobhubV1Application.class
+				.getClassLoader()
+				.getResourceAsStream("static/sample-gh-response.json");
+
+		this.mockmvc.perform(post("/push")
+				.header("Content-Type", "application/json")
+				.content(sampleGhResponse.readAllBytes())
+		);
 	}
 
 }

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class WebhookController {
 
-    @PostMapping("/push")
+    @PostMapping(value = "/push", consumes = "application/json")
     @ResponseBody
     public ResponseEntity<String> handlePush(@RequestBody(required = false) Object requestBody) {
         System.out.println("Request received.");
