@@ -10,7 +10,7 @@ public class WebhookController {
     @PostMapping(value = "/push", consumes = "application/json")
     @ResponseBody
     public ResponseEntity<String> handlePush(@RequestBody(required = false) WebhookPayloadDTO requestBody) {
-        System.out.println("Request received. Zen is "+requestBody.zen());
+        System.out.println("Request received. Zen is "+requestBody.zen);
 
         return ResponseEntity.ok().body("Thanks");
     }
