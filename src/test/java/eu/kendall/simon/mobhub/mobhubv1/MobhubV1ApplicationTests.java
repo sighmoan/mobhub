@@ -9,6 +9,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.io.InputStream;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -16,12 +18,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class MobhubV1ApplicationTests {
 
 	MockMvc mockmvc;
+	byte[] sampleGhResponse;
 
 	@BeforeEach
 	void setup() {
 		this.mockmvc = MockMvcBuilders.standaloneSetup(new WebhookController())
 				.alwaysExpect(status().isOk())
 				.build();
+
+		try {
+			sampleGhResponse = MobhubV1Application.class
+					.getClassLoader()
+					.getResourceAsStream("static/sample-gh-response.json")
+					.readAllBytes();
+		} catch(Exception e) {
+			fail();
+		}
 	}
 
 	@Test
@@ -30,13 +42,9 @@ class MobhubV1ApplicationTests {
 
 	@Test
 	void controllerResponds() throws Exception {
-		InputStream sampleGhResponse = MobhubV1Application.class
-				.getClassLoader()
-				.getResourceAsStream("static/sample-gh-response.json");
-
 		this.mockmvc.perform(post("/push")
 				.header("Content-Type", "application/json")
-				.content(sampleGhResponse.readAllBytes())
+				.content(sampleGhResponse)
 		);
 	}
 
