@@ -11,7 +11,7 @@ class RotationByCommitTest {
 
     @Test
     void shouldRotateWhenCommitMade() {
-        WebhookEvent evt = new WebhookEvent();
+        //WebhookEvent evt = new WebhookEvent();
 
 
     }

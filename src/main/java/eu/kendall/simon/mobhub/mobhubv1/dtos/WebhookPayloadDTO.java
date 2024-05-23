@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import eu.kendall.simon.mobhub.mobhubv1.models.User;
 import eu.kendall.simon.mobhub.mobhubv1.models.WebhookEvent;
+import eu.kendall.simon.mobhub.mobhubv1.models.WebhookEventType;
 
 import java.util.Map;
 
@@ -31,8 +32,8 @@ public class WebhookPayloadDTO {
     }
 
     public WebhookEvent getEvent() {
-        WebhookEvent event = null;
         User user = new User(senderName, senderAvatarUrl, senderId);
-        return event;
+        WebhookEventType eventType = WebhookEventType.PUFF;
+        return new WebhookEvent(eventType, user);
     }
 }
