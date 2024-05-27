@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 public class CommandLineSessionManager implements SessionManager {
     private MobSession session;
 
+    public CommandLineSessionManager(MobSession session) {
+        this.session = session;
+    }
+
     private void setupSession() {
 
     }
@@ -15,11 +19,11 @@ public class CommandLineSessionManager implements SessionManager {
 
     }
 
-    void captureSelection() {
-
+    String captureSelection() {
+        return "";
     }
 
-    void processInput() {
+    void processInput(String input) {
 
     }
 
@@ -38,5 +42,15 @@ public class CommandLineSessionManager implements SessionManager {
         System.out.println("Hello! Welcome to the command line mob manager.");
         System.out.println("Are you ready to set up your mob session?");
 
+    }
+
+    @Override
+    public void rotate() {
+
+    }
+
+    @Override
+    public MobSession getSession() {
+        return session;
     }
 }
