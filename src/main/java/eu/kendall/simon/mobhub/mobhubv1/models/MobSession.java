@@ -24,4 +24,12 @@ public class MobSession {
     public int countParticipants() {
         return allUsers.size();
     }
+
+    public User getDriver() {
+        return currentDriver;
+    }
+
+    public User getNavigator() {
+        return currentNavigator;
+    }
 }

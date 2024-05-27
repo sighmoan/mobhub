@@ -26,5 +26,24 @@ class CommandLineSessionManagerTest {
         assertEquals(1, mgr.getSession().countParticipants());
     }
 
+    @Test
+    void managerCanRotate() {
+        //Arrange
+        mgr.getSession().addParticipant(new User("John", "", "1"));
+        mgr.getSession().addParticipant(new User("Joanna", "", "2"));
+        mgr.getSession().addParticipant(new User("Earl", "", "3"));
+        mgr.getSession().addParticipant(new User("Eamae", "", "4"));
+
+
+        //Act
+        User oldDriver = mgr.getSession().getDriver();
+        User oldNavigator = mgr.getSession().getNavigator();
+        mgr.rotate();
+
+        //Assert
+        assertNotEquals(oldDriver, mgr.getSession().getDriver());
+        assertNotEquals(oldNavigator, mgr.getSession().getNavigator());
+    }
+
 
 }
