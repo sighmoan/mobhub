@@ -8,6 +8,12 @@ public class RotateByPush implements EventManager {
 
     @Autowired
     MobSession currentSession;
+    SessionManager sessionManager;
+
+    public RotateByPush(MobSession currentSession, SessionManager sessionManager) {
+        this.currentSession = currentSession;
+        this.sessionManager = sessionManager;
+    }
 
     @Override
     public void passEvent(WebhookEvent event) {
@@ -15,6 +21,6 @@ public class RotateByPush implements EventManager {
     }
 
     private void rotate() {
-
+        sessionManager.rotate();
     }
 }
